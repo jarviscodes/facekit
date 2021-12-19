@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="facekit",
-    version="0.0.2",
+    version="1.0.0",
     description="Library to ease data collection for face detection/recognition/analysis",
     long_description=README,
     long_description_content_type="text/markdown",

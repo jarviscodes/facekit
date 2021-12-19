@@ -1,6 +1,6 @@
 # Facekit
 
-![Version 0.0.2](https://img.shields.io/badge/Version-0.0.2-blue)
+![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-blue)
 ![MIT License](https://img.shields.io/badge/License-MIT-success)
 
 Face kit is a library that uses DNNs to ease data collection for other neural networks such as face recognition or face analysis.
@@ -39,7 +39,7 @@ Commands:
 ### extract-faces
 ```
 (env) E:\Users\Jarvis\PycharmProjects\Facekit>python -m facekit extract-faces --help
-Facekit v0.0.2
+Facekit v1.0.0
 Usage: python -m facekit extract-faces [OPTIONS]
 
 Options:
@@ -55,7 +55,7 @@ Options:
 
 ```
 (env) E:\Users\Jarvis\PycharmProjects\Facekit>python -m facekit extract-faces-video --help
-Facekit v0.0.2
+Facekit v1.0.0
 Usage: python -m facekit extract-faces-video [OPTIONS]
 
 Options:

@@ -5,7 +5,7 @@ from vidsnap.utils import run_video_extractor
 
 @click.group()
 def main():
-    click.echo("Facekit v0.0.2")
+    click.echo("Facekit v1.0.0")
 
 
 @main.command()
