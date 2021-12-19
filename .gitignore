@@ -1,0 +1,11 @@
+.idea/
+env/
+venv/
+video_in/
+detector_in/
+detector_out/
+*__pycache__*/
+*.pyc
+build/
+dist/
+*.egg-info
