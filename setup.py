@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="facekit",
-    version="0.0.1",
+    version="0.0.2",
     description="Library to ease data collection for face detection/recognition/analysis",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -17,6 +17,6 @@ setup(
     classifiers=["Programming Language :: Python :: 3.8"],
     packages=["facekit"],
     include_package_data=True,
-    install_requires=["click", "colorama", "alive-progress", "mtcnn", "tensorflow"],
+    install_requires=["click", "colorama", "alive-progress", "mtcnn"],
     entry_points={"console_scripts": ["facekit=facekit.__main__:main"]},
 )

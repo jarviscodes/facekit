@@ -1,12 +1,14 @@
 # Facekit
 
-![Version 0.0.1](https://img.shields.io/badge/Version-0.0.1-blue)
+![Version 0.0.2](https://img.shields.io/badge/Version-0.0.2-blue)
 ![MIT License](https://img.shields.io/badge/License-MIT-success)
 
 Face kit is a library that uses DNNs to ease data collection for other neural networks such as face recognition or face analysis.
 It currently has a MTCNN based face extractor for image directories as well as video directories with `vidsnap`.
 
 ## Installation
+
+Note: For some reason I can't get setup.py to pickup tensorflow, so after installing facekit, please also install tensorflow.
 
 ### From PyPi
 
@@ -15,10 +17,12 @@ pip3 install facekit
 pip3 install tensorflow
 ```
 
-### From Sauce
-* `git pull https://github.com/jarviscodes/facekit`
-
-* `setup.py install`
+### From Source
+```
+git pull https://github.com/jarviscodes/facekit
+setup.py install
+pip3 install tensorflow
+```
 
 ## Usage
 ```
@@ -35,7 +39,7 @@ Commands:
 ### extract-faces
 ```
 (env) E:\Users\Jarvis\PycharmProjects\Facekit>python -m facekit extract-faces --help
-Facekit v0.0.1
+Facekit v0.0.2
 Usage: python -m facekit extract-faces [OPTIONS]
 
 Options:
@@ -51,7 +55,7 @@ Options:
 
 ```
 (env) E:\Users\Jarvis\PycharmProjects\Facekit>python -m facekit extract-faces-video --help
-Facekit v0.0.1
+Facekit v0.0.2
 Usage: python -m facekit extract-faces-video [OPTIONS]
 
 Options:
