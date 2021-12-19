@@ -71,4 +71,4 @@ Options:
 ```
 
 ### Demo
-![Video Extractor Gif](video-extractor.gif)
+![Video Extractor Gif](https://github.com/jarviscodes/facekit/raw/main/video-extractor.gif)
