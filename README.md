@@ -8,7 +8,7 @@ It currently has a MTCNN based face extractor for image directories as well as v
 
 In current development:
 * Base gender recognition
-* 
+* Gender Labeling / Data collection finetuning.
 
 ## Installation
 
