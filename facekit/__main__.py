@@ -77,9 +77,10 @@ def classifier_keypress(event, image_path, out_dir, plt, copy):
 
 
 @main.command()
-@click.option('--classifier_in', '-i', type=str)
-@click.option('--classifier_out', '-o', type=str)
-@click.option('--copy', '-c', is_flag=True)
+@click.option('--classifier_in', '-i', type=str, help="Input path for the classifier. Usually output of detector!")
+@click.option('--classifier_out', '-o', type=str, help="Output path for the classifier, "
+                                                       "make sure this exists and has an M and F subfolder.")
+@click.option('--copy', '-c', is_flag=True, help="Copy files instead of moving them.")
 def categorize_gender_manual(classifier_in, classifier_out, copy):
     pin = Path(classifier_in)
     if not pin.exists():

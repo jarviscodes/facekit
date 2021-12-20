@@ -6,6 +6,10 @@
 Face kit is a library that uses DNNs to ease data collection for other neural networks such as face recognition or face analysis.
 It currently has a MTCNN based face extractor for image directories as well as video directories with `vidsnap`.
 
+In current development:
+* Base gender recognition
+* 
+
 ## Installation
 
 Note: For some reason I can't get setup.py to pickup tensorflow, so after installing facekit, please also install tensorflow.
@@ -70,5 +74,28 @@ Options:
 
 ```
 
+### categorize-gender-manual
+
+``` 
+Facekit v1.1.0
+Usage: python -m facekit categorize-gender-manual [OPTIONS]
+
+Options:
+  -i, --classifier_in TEXT   Input path for the classifier. Usually output of
+                             detector!
+  -o, --classifier_out TEXT  Output path for the classifier, make sure this
+                             exists and has an M and F subfolder.
+  -c, --copy                 Copy files instead of moving them.
+  --help                     Show this message and exit.
+```
+
 ### Demo
+
+##### Video Extractor
+
 ![Video Extractor Gif](https://github.com/jarviscodes/facekit/raw/main/video-extractor.gif)
+
+
+##### Classifier labeling
+
+![Classifier labeling Gif](https://github.com/jarviscodes/facekit/raw/main/classifier-labeling.gif)
