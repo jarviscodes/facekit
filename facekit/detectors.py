@@ -2,7 +2,7 @@ import os
 from PIL import Image
 import numpy as np
 from alive_progress import alive_bar
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 from facekit.loaders import ImageFileLoader
 from mtcnn.mtcnn import MTCNN
 from facekit.schemas import FaceDetectionResult, FaceDetectionTarget
@@ -68,13 +68,19 @@ class MTCNNDetector(FaceDetector):
 
         self.detection_results.append(fd_result)
 
-    def extract_faces(self):
+    def extract_faces(self, flush):
         title = f"{Fore.LIGHTYELLOW_EX}Extracting{Style.RESET_ALL}"
         if self._preloaded:
             with alive_bar(len(self.detection_targets), title=title) as bar:
                 for fd_target in self.detection_targets:
                     fd_result = self._get_image_face_results(fd_target)
                     self._filter_and_cut_results(fd_result)
+                    if flush:
+                        try:
+                            fd_result = self.detection_results.pop()
+                            self.store_single_fdresult(fd_result)
+                        except IndexError:
+                            print("No result here.")
                     bar()
         else:
             with alive_bar(len(self.image_path_list), title=title) as bar:
@@ -83,14 +89,23 @@ class MTCNNDetector(FaceDetector):
                                                     image_pixels=ImageFileLoader.get_image_pixels_from_file(image_path))
                     fd_result = self._get_image_face_results(fd_target)
                     self._filter_and_cut_results(fd_result)
+                    if flush:
+                        try:
+                            fd_result = self.detection_results.pop()
+                            self.store_single_fdresult(fd_result)
+                        except IndexError:
+                            print("No result here.")
                     bar()
+
+    def store_single_fdresult(self, fd_result: FaceDetectionResult):
+        ctr = 0
+        for face in fd_result.face_arrays:
+            im = Image.fromarray(face)
+            im.save(f"{self.output_path}/{fd_result.target.file_stem}_{ctr}.jpg")
+            ctr += 1
 
     def store_extracted_faces(self):
         with alive_bar(len(self.detection_results), title=f"{Fore.GREEN}Storing faces{Style.RESET_ALL}") as bar:
             for result in self.detection_results:
-                ctr = 0
-                for face in result.face_arrays:
-                    im = Image.fromarray(face)
-                    im.save(f"{self.output_path}/{result.target.file_stem}_{ctr}.jpg")
-                    ctr += 1
+                self.store_single_fdresult(result)
                 bar()

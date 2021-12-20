@@ -9,6 +9,7 @@ from colorama import Fore, Style
 import glob
 from pathlib import Path
 import shutil
+import numpy as np
 
 
 @click.group()
@@ -22,10 +23,17 @@ def main():
 @click.option('--accuracy', '-a', type=float, default=0.98, help="Minimum detector threshold accuracy.")
 @click.option('--preload', is_flag=True, help="Preload images in memory. "
                                               "More memory intensive, might be faster on HDDs!")
-def extract_faces(in_path, out_path, accuracy, preload):
+@click.option('--flush', is_flag=True, help="Immediately pops and stores the images when faces are detected. "
+                                            "Memory is freed faster this way.")
+def extract_faces(in_path, out_path, accuracy, preload, flush):
     detector = MTCNNDetector(input_path=in_path, output_path=out_path, accuracy_threshold=accuracy, preload=preload)
-    detector.extract_faces()
-    detector.store_extracted_faces()
+    try:
+        detector.extract_faces(flush=flush)
+    except np.core._exceptions.MemoryError:
+        click.secho(f"{Fore.RED} Out of memory! Flushing buffers!")
+    finally:
+        if not flush:
+            detector.store_extracted_faces()
 
 
 @main.command()
@@ -36,7 +44,9 @@ def extract_faces(in_path, out_path, accuracy, preload):
 @click.option('--accuracy', '-a', type=float, default=0.98, help="Minimum detector threshold accuracy.")
 @click.option('--preload', is_flag=True, help="Preload images in memory. "
                                               "More memory intensive, might be faster on HDDs!")
-def extract_faces_video(video_in, video_interval, detector_in, detector_out, accuracy, preload):
+@click.option('--flush', is_flag=True, help="Immediately pops and stores the images when faces are detected. "
+                                            "Memory is freed faster this way.")
+def extract_faces_video(video_in, video_interval, detector_in, detector_out, accuracy, preload, flush):
     click.secho("Running video extractor, this may take a while...")
     run_video_extractor(input_path=video_in,
                         output_path=detector_in,
@@ -45,8 +55,13 @@ def extract_faces_video(video_in, video_interval, detector_in, detector_out, acc
                         snap_every_x=video_interval)
 
     detector = MTCNNDetector(input_path=detector_in, output_path=detector_out, accuracy_threshold=accuracy, preload=preload)
-    detector.extract_faces()
-    detector.store_extracted_faces()
+    try:
+        detector.extract_faces(flush=flush)
+    except np.core._exceptions.MemoryError:
+        click.secho(f"{Fore.RED} Out of memory! Flushing buffers!")
+    finally:
+        if not flush:
+            detector.store_extracted_faces()
 
 
 def handle_move_or_copy(image_path, out_dir, copy_mode, classifier_string):
