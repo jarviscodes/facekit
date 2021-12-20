@@ -5,6 +5,7 @@ from alive_progress import alive_bar
 from colorama import Fore, Back, Style
 from facekit.loaders import ImageFileLoader
 from mtcnn.mtcnn import MTCNN
+from facekit.schemas import FaceDetectionResult, FaceDetectionTarget
 
 
 class FaceDetector(object):
