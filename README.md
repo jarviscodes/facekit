@@ -96,6 +96,6 @@ Options:
 ![Video Extractor Gif](https://github.com/jarviscodes/facekit/raw/main/video-extractor.gif)
 
 
-##### Classifier labeling
+##### Classifier labeling (currently only in main branch)
 
 ![Classifier labeling Gif](https://github.com/jarviscodes/facekit/raw/main/classifier-labeling.gif)
