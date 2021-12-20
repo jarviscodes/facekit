@@ -1,45 +1,10 @@
 import os
-from pathlib import Path
-import matplotlib.pyplot as plt
-import glob
 from PIL import Image
 import numpy as np
 from alive_progress import alive_bar
 from colorama import Fore, Back, Style
-
-# Suppress logging on mtcnn tf imports
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+from facekit.loaders import ImageFileLoader
 from mtcnn.mtcnn import MTCNN
-
-
-class ImageFileLoader(object):
-    @classmethod
-    def get_image_path_list(cls, image_dir):
-        return [Path(p) for p in glob.glob(f"{image_dir}/*.jpg")]
-
-    @classmethod
-    def get_image_pixels_from_file(cls, image_file):
-        image_pixels = plt.imread(image_file)
-        return image_pixels
-
-
-class FaceDetectionTarget(object):
-    image_pixels: list
-    file_stem: str
-
-    def __init__(self, image_pixels, file_stem):
-        self.image_pixels = image_pixels
-        self.file_stem = file_stem
-
-
-class FaceDetectionResult(object):
-    target: FaceDetectionTarget
-    detections: list
-
-    def __init__(self, target: FaceDetectionTarget, detections: list):
-        self.target = target
-        self.detections = detections
-        self.face_arrays = []
 
 
 class FaceDetector(object):

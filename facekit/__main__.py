@@ -1,5 +1,5 @@
 import click
-from facekit.models import MTCNNDetector
+from facekit.detectors import MTCNNDetector
 from vidsnap.utils import run_video_extractor
 
 
